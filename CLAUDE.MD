@@ -2,12 +2,20 @@
 
 When coding in this project, follow these security principles from the start:
 
-## Authentication & Authorization
+## Supabase Authentication
 
+- **Always use Supabase helpers** for all auth-related operations
+- When implementing auth features, read Supabase docs via the Supabase MCP tool or ask for docs to copy/paste
 - Use `getUser()` not `getSession()` in all API routes and server actions
-- Check authentication AND authorization on every API endpoint
-- Implement RLS policies on ALL Supabase tables and storage buckets
 - Use middleware to protect routes
+
+## Authorization
+
+- **Always read `docs/authorization_rules.md`** before implementing any authorization logic
+- This document defines who can access what and what actions each role can perform
+- Check authentication first (who are you?), then authorization (what can you do?)
+- Implement RLS policies on ALL Supabase tables and storage buckets
+- Test both positive cases (authorized access works) and negative cases (unauthorized access blocked)
 
 ## Input & Output
 
@@ -18,12 +26,22 @@ When coding in this project, follow these security principles from the start:
 
 ## Secrets & Environment
 
+- **Never use service role key without explicit approval**
 - Never use service role key client-side
 - No API keys in code or `NEXT_PUBLIC_` env vars
 - Keep all secrets server-side only
 
-## Business Logic
+## Business Logic & Code Organization
 
+### Server Actions vs API Routes
+- **Always use Server Actions** for application logic
+- Only create API routes for external integrations (e.g., Stripe webhooks) or multi-app scenarios (mobile + web)
+
+### Workflow Organization
+- Keep page-specific workflows in the same folder as the page
+- Keep shared workflows in the `lib` folder
+
+### General Rules
 - Sensitive calculations and workflows must be server-side
 - Never trust client-side data for important operations
 - TriggerDev jobs must validate authorization
@@ -54,13 +72,15 @@ When coding in this project, follow these security principles from the start:
 - Keep dependencies updated
 - Add CODEOWNERS file for branch protection
 
-## Quick Reference
+## Database Migrations
 
-Before committing code, ask:
-1. Did I authenticate AND authorize?
-2. Did I validate all inputs?
-3. Did I sanitize all outputs?
-4. Is business logic server-side only?
-5. Are secrets protected?
+- **Never edit past migration files** - Always create new migrations for changes
+- Migration file timestamps must use local date timestamp format
+- Keep migration files immutable once applied
 
-Run security agents regularly with `@[agent-name]` to catch issues early.
+## Supabase Functions & Edge Functions
+
+- **Avoid using Supabase Edge Functions** for regular application logic/workflows
+- Use Next.js Server Actions instead for standard workflows
+- Supabase Functions are OK for RLS policy helpers
+- When needed, Supabase Functions should be defined in the **private schema**, not public
