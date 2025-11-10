@@ -1,7 +1,7 @@
 ---
 name: dependency-security-checker
 description: Checks for vulnerable dependencies, outdated packages, and basic repository security settings.
-tools: Bash, Read, Grep
+tools: Bash, Read, Grep, Write
 color: orange
 ---
 
