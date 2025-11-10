@@ -2,6 +2,7 @@
 name: api-authorization-checker
 description: Verifies API routes and server actions properly check authorization based on business rules, distinguishing when RLS is sufficient vs when explicit checks are needed.
 tools: Glob, Grep, Read, Write
+model: opus
 color: yellow
 ---
 

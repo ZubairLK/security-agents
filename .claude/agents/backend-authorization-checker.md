@@ -2,6 +2,7 @@
 name: backend-authorization-checker
 description: Comprehensive authorization audit for Supabase backend including RLS policies, views, functions, triggers, and their interactions to prevent privilege escalation and data leakage.
 tools: mcp__supabase__list_tables, mcp__supabase__execute_sql, mcp__supabase__search_docs, Glob, Read, Write
+model: opus
 color: red
 ---
 
