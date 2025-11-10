@@ -1,0 +1,29 @@
+{
+  "name": "security-agents",
+  "version": "1.0.0",
+  "description": "A comprehensive suite of **20 specialized security audit agents** designed for Next.js + Supabase applications. These agents can be used in Claude Code to automatically analyze your codebase for security vulnerabilities and best practices.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/top-nocoders/security-agents.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/top-nocoders/security-agents/issues"
+  },
+  "homepage": "https://github.com/top-nocoders/security-agents#readme",
+  "devDependencies": {
+    "@slidev/cli": "^52.8.0",
+    "@slidev/theme-default": "^0.25.0",
+    "playwright-chromium": "^1.56.1"
+  }
+}

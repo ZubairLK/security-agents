@@ -1,6 +1,6 @@
 # Security Audit Agents
 
-A comprehensive suite of **20 specialized security audit agents** for Next.js + Supabase applications. Each agent focuses on a specific security domain and writes detailed findings to `security-audit/` folder.
+A comprehensive suite of **23 specialized security audit agents** for Next.js + Supabase applications. Each agent focuses on a specific security domain and writes detailed findings to `security-audit/` folder.
 
 ## Philosophy: Defense in Depth (Seatbelts + Airbags)
 
@@ -11,16 +11,24 @@ Multiple layers of security checks at various levels:
 - **Output Sanitization** - Verify data is safe to display
 - **Business Logic** - Verify operations are secure
 
-## Quick Start
+## Quick Start - Recommended Workflow
 
 ```bash
-# Run a specific agent
-@auth-security-auditor
+# Step 1: Generate authorization rules documentation (prerequisite for many agents)
+@authorization-rules-writer
 
-# Run multiple agents
-@rls-coverage-checker
-@api-auth-checker
-@input-validation-checker
+# Step 2: Review the generated rules
+cat docs/authorization_rules.md
+
+# Step 3: Run all security agents in parallel (much faster!)
+# You can run multiple agents in a single command for parallel execution
+@auth-security-auditor @api-auth-checker @input-validation-checker @output-sanitization-checker @query-injection-checker @rls-coverage-checker @supabase-advisor-checker @backend-authorization-checker @email-security-checker @client-secrets-checker @dependency-security-checker @triggerdotdev-security-checker @api-authorization-checker @file-upload-checker @logging-exposure-checker @rate-limiting-checker @browser-security-checker @webhook-security-checker @url-validation-checker @business-logic-checker @input-sanitization-checker
+
+# Step 4: Run meta-analysis to identify patterns and prioritize fixes
+@security-meta-analyzer
+
+# Step 5: Review the meta-analysis report for strategic insights
+cat security-audit/meta-analysis-report.md
 ```
 
 Each agent will analyze your codebase and write a report to `security-audit/[agent-name]-report.md`.
@@ -28,6 +36,21 @@ Each agent will analyze your codebase and write a report to `security-audit/[age
 ---
 
 ## Security Coverage Matrix
+
+### 📋 Prerequisites & Analysis
+
+| Agent | Covers | Report File |
+|-------|--------|-------------|
+| **authorization-rules-writer** | Extracts business authorization rules from codebase, documents WHO can do WHAT | `docs/authorization_rules.md` |
+| **security-meta-analyzer** | Analyzes all security reports to identify patterns, systemic issues, and prioritize remediation | `meta-analysis-report.md` |
+
+**Purpose:**
+- ✅ Create authorization baseline for other agents to verify against
+- ✅ Identify cross-cutting concerns and architectural issues
+- ✅ Generate strategic remediation roadmap
+- ✅ Calculate composite risk scores for prioritization
+
+---
 
 ### 🔐 Authentication & Session Management
 
@@ -66,11 +89,13 @@ Each agent will analyze your codebase and write a report to `security-audit/[age
 | Agent | Covers | Report File |
 |-------|--------|-------------|
 | **input-validation-checker** | Zod/validation library usage, all user inputs validated | `input-validation-report.md` |
+| **input-sanitization-checker** | Server-side sanitization of HTML, URLs, filenames before storage | `input-sanitization-report.md` |
 | **query-injection-checker** | SQL/NoSQL injection prevention, parameterized queries | `query-injection-report.md` |
 | **url-validation-checker** | User-provided URLs validated, open redirect & SSRF prevention | `url-validation-report.md` |
 
 **Checklist Coverage:**
 - ✅ Input validation (SQL/NoSQL, XSS, data type validation)
+- ✅ Input sanitization (rich text, URLs, filenames cleaned server-side)
 - ✅ URL validation & sanitization
 
 ---
@@ -182,26 +207,29 @@ Each agent has a **single responsibility**:
 
 | # | Agent Name | Color | Model | Primary Focus |
 |---|------------|-------|-------|---------------|
-| 1 | auth-security-auditor | Blue | Sonnet | Supabase Auth implementation |
-| 2 | api-auth-checker | Green | Sonnet | API authentication (getUser vs getSession) |
-| 3 | input-validation-checker | Yellow | Sonnet | Input validation presence |
-| 4 | output-sanitization-checker | Purple | Sonnet | XSS prevention & output escaping |
-| 5 | query-injection-checker | Orange | Sonnet | SQL/NoSQL injection prevention |
-| 6 | rls-coverage-checker | Red | Opus | RLS policies on tables & storage |
-| 7 | supabase-advisor-checker | Cyan | - | Supabase built-in advisories |
-| 8 | backend-authorization-checker | Red | - | Database functions, views, triggers |
-| 9 | email-security-checker | - | - | Application email security |
-| 10 | client-secrets-checker | - | - | Secrets exposure client-side |
-| 11 | dependency-security-checker | - | - | npm audit & CODEOWNERS |
-| 12 | triggerdotdev-security-checker | - | - | TriggerDev job security |
-| 13 | api-authorization-checker | - | - | API authorization vs business rules |
-| 14 | file-upload-checker | Cyan | - | File upload security |
-| 15 | logging-exposure-checker | Orange | - | Sensitive data in logs |
-| 16 | rate-limiting-checker | Pink | - | Rate limiting on endpoints |
-| 17 | browser-security-checker | Purple | - | Security headers & CSRF |
-| 18 | webhook-security-checker | Teal | - | Webhook signature validation |
-| 19 | url-validation-checker | Indigo | - | URL validation (open redirect, SSRF) |
-| 20 | business-logic-checker | Amber | - | Server-side business logic |
+| 1 | authorization-rules-writer | Purple | Opus | Extract & document business authorization rules |
+| 2 | auth-security-auditor | Blue | Sonnet | Supabase Auth implementation |
+| 3 | api-auth-checker | Green | Sonnet | API authentication (getUser vs getSession) |
+| 4 | input-validation-checker | Yellow | Sonnet | Input validation presence |
+| 5 | input-sanitization-checker | Orange | Sonnet | Server-side HTML/URL/filename sanitization |
+| 6 | output-sanitization-checker | Purple | Sonnet | XSS prevention & output escaping |
+| 7 | query-injection-checker | Orange | Sonnet | SQL/NoSQL injection prevention |
+| 8 | rls-coverage-checker | Red | Opus | RLS policies on tables & storage |
+| 9 | supabase-advisor-checker | Cyan | - | Supabase built-in advisories |
+| 10 | backend-authorization-checker | Red | - | Database functions, views, triggers |
+| 11 | email-security-checker | - | - | Application email security |
+| 12 | client-secrets-checker | - | - | Secrets exposure client-side |
+| 13 | dependency-security-checker | - | - | npm audit & CODEOWNERS |
+| 14 | triggerdotdev-security-checker | - | - | TriggerDev job security |
+| 15 | api-authorization-checker | - | - | API authorization vs business rules |
+| 16 | file-upload-checker | Cyan | - | File upload security |
+| 17 | logging-exposure-checker | Orange | - | Sensitive data in logs |
+| 18 | rate-limiting-checker | Pink | - | Rate limiting on endpoints |
+| 19 | browser-security-checker | Purple | - | Security headers & CSRF |
+| 20 | webhook-security-checker | Teal | - | Webhook signature validation |
+| 21 | url-validation-checker | Indigo | - | URL validation (open redirect, SSRF) |
+| 22 | business-logic-checker | Amber | - | Server-side business logic |
+| 23 | security-meta-analyzer | Gold | Opus | Cross-report analysis & strategic insights |
 
 ---
 
