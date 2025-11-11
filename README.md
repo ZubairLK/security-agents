@@ -1,12 +1,19 @@
 # Security Audit Agents for Claude Code
 
-A comprehensive suite of **20 specialized security audit agents** designed for Next.js + Supabase applications. These agents can be used in Claude Code to automatically analyze your codebase for security vulnerabilities and best practices.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-blue)](https://claude.ai/claude-code)
+[![Next.js](https://img.shields.io/badge/Next.js-Optimized-black)](https://nextjs.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-Ready-green)](https://supabase.com/)
+
+A comprehensive suite of **23 specialized security audit agents** designed for Next.js + Supabase applications. These agents can be used in Claude Code to automatically analyze your codebase for security vulnerabilities and best practices.
 
 ## What's Included
 
-- **20 Security Agents** - Each focused on a specific security domain
+- **23 Security Agents** - Each focused on a specific security domain
 - **Claude Code Settings** - Pre-configured permissions and MCP server integrations
 - **Defense in Depth** - Multiple layers of security coverage
+- **Meta-Analysis** - Strategic insights across all security reports
+- **Authorization Rules Writer** - Automatic business rules documentation
 
 ## Installation
 
@@ -21,12 +28,23 @@ A comprehensive suite of **20 specialized security audit agents** designed for N
 
 ## Quick Start
 
-Run any agent by typing its name with the `@` prefix:
+### Recommended Workflow
 
 ```bash
-@auth-security-auditor
-@rls-coverage-checker
-@input-validation-checker
+# Step 1: Generate authorization rules documentation
+@authorization-rules-writer
+
+# Step 2: Review the generated rules
+cat docs/authorization_rules.md
+
+# Step 3: Run all security agents in parallel (fastest!)
+@auth-security-auditor @api-auth-checker @input-validation-checker @output-sanitization-checker @query-injection-checker @rls-coverage-checker @supabase-advisor-checker @backend-authorization-checker @email-security-checker @client-secrets-checker @dependency-security-checker @triggerdotdev-security-checker @api-authorization-checker @file-upload-checker @logging-exposure-checker @rate-limiting-checker @browser-security-checker @webhook-security-checker @url-validation-checker @business-logic-checker @input-sanitization-checker
+
+# Step 4: Run meta-analysis for strategic insights
+@security-meta-analyzer
+
+# Step 5: Review the comprehensive analysis
+cat security-audit/meta-analysis-report.md
 ```
 
 Each agent will analyze your codebase and write a detailed report to `security-audit/[agent-name]-report.md`.
@@ -168,8 +186,24 @@ For detailed information about each agent, see `.claude/agents/README.md`
 
 ## License
 
-[Add your license here]
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions welcome! Please ensure:
+- Agents follow the lean, principle-based approach
+- Single responsibility per agent
+- Include Write tool for report generation
+- Update documentation
+
+## Support
+
+- **Issues**: [GitHub Issues](https://github.com/ZubairLK/security-agents/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/ZubairLK/security-agents/discussions)
+- **Documentation**: See `.claude/agents/README.md` for detailed agent docs
 
 ## Credits
 
-Created for comprehensive security auditing of modern web applications.
+Created by [Zubair LK](https://github.com/ZubairLK) for comprehensive security auditing of modern web applications.
+
+Built with ❤️ for the Next.js + Supabase community.
