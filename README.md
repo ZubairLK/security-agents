@@ -30,26 +30,23 @@ A comprehensive suite of **23 specialized security audit agents** designed for N
 
 ## Quick Start
 
-### Recommended Workflow
+### Optimal 3-Step Workflow
 
 ```bash
-# Step 1: Generate authorization rules documentation
+# Step 1: Generate authorization rules (prerequisite for many agents)
 @authorization-rules-writer
 
-# Step 2: Review the generated rules
-cat docs/authorization_rules.md
+# Step 2: Run all security agents in parallel (fastest!)
+@auth-security-auditor @api-auth-checker @api-authorization-checker @input-validation-checker @input-sanitization-checker @output-sanitization-checker @query-injection-checker @rls-coverage-checker @supabase-advisor-checker @backend-authorization-checker @email-security-checker @client-secrets-checker @dependency-security-checker @triggerdotdev-security-checker @file-upload-checker @logging-exposure-checker @rate-limiting-checker @browser-security-checker @webhook-security-checker @url-validation-checker @business-logic-checker
 
-# Step 3: Run all security agents in parallel (fastest!)
-@auth-security-auditor @api-auth-checker @input-validation-checker @output-sanitization-checker @query-injection-checker @rls-coverage-checker @supabase-advisor-checker @backend-authorization-checker @email-security-checker @client-secrets-checker @dependency-security-checker @triggerdotdev-security-checker @api-authorization-checker @file-upload-checker @logging-exposure-checker @rate-limiting-checker @browser-security-checker @webhook-security-checker @url-validation-checker @business-logic-checker @input-sanitization-checker
-
-# Step 4: Run meta-analysis for strategic insights
+# Step 3: Run meta-analysis for strategic insights
 @security-meta-analyzer
-
-# Step 5: Review the comprehensive analysis
-cat security-audit/meta-analysis-report.md
 ```
 
-Each agent will analyze your codebase and write a detailed report to `security-audit/[agent-name]-report.md`.
+**What you get:**
+- `docs/authorization_rules.md` - Your application's business authorization rules
+- `security-audit/*-report.md` - 21 detailed security reports
+- `security-audit/meta-analysis-report.md` - Strategic analysis with prioritized roadmap
 
 ## Security Coverage
 
@@ -143,31 +140,27 @@ Many agents read `docs/authorization_rules.md` to understand your application-sp
 
 ## Running a Complete Audit
 
-Run all agents sequentially:
+### Optimal 3-Step Workflow
+
 ```bash
-@auth-security-auditor
-@api-auth-checker
-@input-validation-checker
-@output-sanitization-checker
-@database-query-checker
-@rls-coverage-checker
-@supabase-advisor-checker
-@backend-authorization-checker
-@email-security-checker
-@client-secrets-checker
-@dependency-security-checker
-@triggerdotdev-security-checker
-@api-authorization-checker
-@file-upload-checker
-@logging-exposure-checker
-@rate-limiting-checker
-@browser-security-checker
-@webhook-security-checker
-@url-validation-checker
-@business-logic-checker
+# Step 1: Generate authorization rules (prerequisite for other agents)
+@authorization-rules-writer
+
+# Step 2: Run all security agents in parallel (fastest approach!)
+@auth-security-auditor @api-auth-checker @api-authorization-checker @input-validation-checker @input-sanitization-checker @output-sanitization-checker @query-injection-checker @rls-coverage-checker @supabase-advisor-checker @backend-authorization-checker @email-security-checker @client-secrets-checker @dependency-security-checker @triggerdotdev-security-checker @file-upload-checker @logging-exposure-checker @rate-limiting-checker @browser-security-checker @webhook-security-checker @url-validation-checker @business-logic-checker
+
+# Step 3: Run meta-analysis for strategic insights
+@security-meta-analyzer
 ```
 
 All reports will be written to `security-audit/*.md`
+
+The meta-analysis report (`security-audit/meta-analysis-report.md`) will provide:
+- Cross-cutting concerns across all reports
+- Systemic patterns and root causes
+- Prioritized remediation roadmap
+- Vulnerability heat map
+- Quick wins and strategic recommendations
 
 ## Technical Details
 
