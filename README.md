@@ -7,6 +7,8 @@
 
 A comprehensive suite of **23 specialized security audit agents** designed for Next.js + Supabase applications. These agents can be used in Claude Code to automatically analyze your codebase for security vulnerabilities and best practices.
 
+> **📦 Optimized for Next.js + Supabase, but adaptable to any stack!** While these agents are specifically tailored for Next.js and Supabase, the security principles and patterns they check for are universal. See [Adapting to Your Stack](#adapting-to-your-stack) for guidance on customizing for other frameworks.
+
 ## What's Included
 
 - **23 Security Agents** - Each focused on a specific security domain
@@ -183,6 +185,43 @@ Uses:
 ## Full Agent Details
 
 For detailed information about each agent, see `.claude/agents/README.md`
+
+---
+
+## Adapting to Your Stack
+
+While optimized for **Next.js + Supabase**, these agents can be customized for your tech stack.
+
+### Universal Agents (Work Anywhere)
+
+These agents work across all frameworks without modification:
+- input-validation-checker
+- output-sanitization-checker
+- client-secrets-checker
+- dependency-security-checker
+- logging-exposure-checker
+- rate-limiting-checker
+- webhook-security-checker
+- business-logic-checker
+
+### Framework-Specific Agents
+
+These need customization for your stack:
+- **auth-security-auditor** - Update for your auth library patterns
+- **rls-coverage-checker** - Adapt for your database access control
+- **api-auth-checker** - Change API route patterns
+- **api-authorization-checker** - Update authorization checking patterns
+- **backend-authorization-checker** - Modify for your database system
+- **triggerdotdev-security-checker** - Replace with your background job system
+
+### How to Customize
+
+1. Copy agent file from `.claude/agents/[agent-name].md`
+2. Update search patterns for your framework
+3. Replace documentation references (if using MCP tools)
+4. Keep security principles unchanged (OWASP guidelines are universal)
+
+See individual agent files for their search patterns and modify accordingly for your stack.
 
 ## License
 
