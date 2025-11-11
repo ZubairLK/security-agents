@@ -238,4 +238,4 @@ Contributions welcome! Please ensure:
 
 Created by [Zubair LK](https://github.com/ZubairLK) for comprehensive security auditing of modern web applications.
 
-Built with ❤️ for the Next.js + Supabase community.
+Built with ❤️ for the Vibe coding community
